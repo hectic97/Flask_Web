@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PoAItry</title>
+    <style>
+        #txtarea
+        {
+            width:170%;
+            height:130%;
+            position:absolute;
+            top:600px;
+            left:20%;
+
+        }
+        #tbox
+        {
+            background-color: black;
+            font-family:"Malgun Gothic", serif;
+            font-size: 20px;
+            color:#FFFFFF;
+        } body{background-color: rgb(0, 0, 0);}
+    </style>
+</head>
+<body>
+<div style="font:italic bold 1.3em/1em Georgia,serif;text-align:center;font-size:30px;color:#FFFFFF">
+    <h1>PoAItry</h1>
+</div>
+<br>
+<br>
+{#p style="color:#FFFFFF;font-size:40px">+</p>#}
+<div>
+<img src="../static/nn.jpeg" style= "position:absolute; TOP:200px; LEFT:50px;"  alt="nn" width ="400" height="300">
+    <p style="color:#FFFFFF;font-size:120px;position:absolute; TOP:20%; LEFT:47%;">+</p>
+<img src="../static/fountain_pen.jpg" style= "position:absolute; TOP:200px; RIGHT:50px;"  alt="fp"width ="400" height="300">
+</div>
+{#<p style="color:#FFFFFF;font:italic bold 1.2em/1em Georgia,serif;font-size:30px;position:absolute;TOP:500px;">Korean poetry generator using a single LSTM layer</p>#}
+{#<textarea cols='60' rows='8'>{{ poetry }}</textarea>#}
+{#{%for j in range(120) %}#}
+{#    <p style="color:#FFFFFF;font-size:20px;">{{poetry[j]}}</p>#}
+{##}
+{#{% endfor %}#}
+<div id="txtarea">
+    <textarea id = 'tbox' cols="80", rows="20">{{ poetry }}</textarea>
+</div>
+</body>
+
+</html>

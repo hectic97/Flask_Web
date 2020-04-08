@@ -1,8 +1,12 @@
 from flask import Flask, render_template,url_for,request,redirect
-
+from execution import Text_Generator
+import tensorflow as tf
 app = Flask(__name__)
-
+# model = tf.keras.Sequential()
+model=tf.keras.models.load_model(r'C:\Users\집\Flask\static\model\Generator.h5')
 chosen_movies=[]
+from execution import Text_Generator
+
 
 @app.route('/fmr/info')
 def info():
@@ -86,10 +90,42 @@ def results():
                           'movie_director_split': 'Director', 'movie_actor_split': 'Cast'})
 
     return'<h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;###### TOP 10 MOVIES FOR YOU #####</h1>'+new_df.to_html(justify='center')+"<a href='/fmr'><br>Go Back</a>"
+@app.route('/load_model')
+def load_model():
+    # global model
+    # vocab_size = 17673
+    # embedding_dim = 1024
+    # rnn_units = 512
+    # model.add(tf.keras.layers.Embedding(vocab_size, embedding_dim, batch_input_shape=[1, None]))
+    # print('HELLOOOOOOOOOOOOOOO')
+    # model.add(tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+    # model.add(tf.keras.layers.Dense(vocab_size))
+    # print('why no load')
+    # model.summary()
+    # model.load_weights(r'C:\Users\집\Flask\static\model\weights')
+    print('loaded')
+    return redirect(url_for('poait'))
+
+@app.route('/poait')
+def poait():
+    # global model
+    # import tensorflow as tf
+    # vocab_size = 17673
+    # embedding_dim = 1024
+    # rnn_units = 512
+    # model = tf.keras.Sequential()
+    # model.add(tf.keras.layers.Embedding(vocab_size, embedding_dim, batch_input_shape=[1, None]))
+    # model.add(
+    #     tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+    # model.add(tf.keras.layers.Dense(vocab_size))
+    # model.load_weights('../static/model/weights')
+    poetry = Text_Generator.main()
+    return render_template('aip.html',poetry = poetry)
 
 
 if __name__ == '__main__':
-	app.run(debug=True,threaded=True)
+	app.run(debug=True,threaded= True)
+# app.run(debug=False, threaded=False)
 
 """<div style = "font:italic bold 1.1em/1em 'Georgia',serif;text-align:center;font-size:26px;color:#FFFFFF">
 <h1> Movie recommendation system </h1>
