@@ -36,14 +36,14 @@ def generate_text(model2, temp):
 
 def main():
 
-    # vocab_size = 17673
-    # embedding_dim = 1024
-    # rnn_units = 512
-    # model = tf.keras.Sequential()
-    # model.add(tf.keras.layers.Embedding(vocab_size, embedding_dim, batch_input_shape=[1, None]))
-    # model.add(tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
-    # model.add(tf.keras.layers.Dense(vocab_size))
-    # model.load_weights('../static/model/weights')
+    vocab_size = 17673
+    embedding_dim = 820
+    rnn_units = 480
+    model = tf.keras.Sequential()
+    model.add(tf.keras.layers.Embedding(vocab_size, embedding_dim, batch_input_shape=[1, None]))
+    model.add(tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+    model.add(tf.keras.layers.Dense(vocab_size))
+    model.load_weights('../static/model/model_weigths')
     poem = ''
     while 1:
         a = generate_text(model, 1.6)

@@ -2,8 +2,9 @@ from flask import Flask, render_template,url_for,request,redirect
 from execution import Text_Generator
 import tensorflow as tf
 app = Flask(__name__)
-# model = tf.keras.Sequential()
+model = tf.keras.Sequential()
 model=tf.keras.models.load_model(r'C:\Users\집\Flask\static\model\Generator.h5')
+
 chosen_movies=[]
 from execution import Text_Generator
 
@@ -15,40 +16,6 @@ def info():
 @app.route('/')
 def home():
 	return render_template('home.html')
-
-
-# @app.route('/pandas')
-
-# def index():
-    # return render_template('index.html')
-#
-# def make_read_excel():
-#     import pandas as pd
-#     # import numpy as np
-#     #
-#     # writer = pd.ExcelWriter('static/excel_for_flask.xlsx')
-#     # df = pd.DataFrame({"col_{}".format(i):list(np.random.randint(0,100,100))for i in range(8)})
-#     # df.to_excel(writer, 'sheet1')
-#     # writer.save()
-#     #
-#     # df = pd.read_excel('static/excel_for_flask.xlsx')
-#     df = pd.read_csv('static/movie_df.csv')
-#
-#     return df.to_html()
-
-# @app.route('/submit')
-# def main_get(num=None):
-#     return render_template('submit.html',num=num)
-# @app.route('/calculate',methods=['POST','GET'])
-# def calculate(num=None):
-#     if request.method=='POST':
-#         pass
-#     elif request.method=='GET':
-#         temp = request.args.get('num')
-#         temp = int(temp)
-#
-#         temp1 = request.args.get('char1')
-#         return render_template('submit.html',num=temp,char1=temp1)
 
 @app.route('/fmr', methods=['POST','GET'])
 def select():
@@ -97,12 +64,10 @@ def load_model():
     # embedding_dim = 1024
     # rnn_units = 512
     # model.add(tf.keras.layers.Embedding(vocab_size, embedding_dim, batch_input_shape=[1, None]))
-    # print('HELLOOOOOOOOOOOOOOO')
     # model.add(tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
     # model.add(tf.keras.layers.Dense(vocab_size))
-    # print('why no load')
     # model.summary()
-    # model.load_weights(r'C:\Users\집\Flask\static\model\weights')
+    # model.load_weights(r'C:\Users\집\Flask\static\model\model_weights.h5')
     print('loaded')
     return redirect(url_for('poait'))
 
@@ -118,7 +83,7 @@ def poait():
     # model.add(
     #     tf.keras.layers.LSTM(rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
     # model.add(tf.keras.layers.Dense(vocab_size))
-    # model.load_weights('../static/model/weights')
+    # model.load_weights(r'C:\Users\집\Flask\static\model\model_weight.h5')
     poetry = Text_Generator.main()
     return render_template('aip.html',poetry = poetry)
 
